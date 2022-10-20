@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.sketchboard {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 60vw;
+  height: 60vw;
+}
+
+.sketchboard__pixel {
+  background-color: white;
+}
+
+.sketchboard__pixel--hover {
+  border: 1px solid red;
+}
+
+.sketchboard__pixel--clicked {
+  background-color: blue;
+}
