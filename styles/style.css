@@ -1,7 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: Roboto, sans-serif;
 }
 
 .sketchboard {
@@ -12,6 +18,26 @@
   max-width: 40vw;
   max-height: 40vh;
   gap: 1em;
+}
+
+.sketchboard__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.sketchboard__buttons__clear-button {
+  box-shadow: 0em 0.10em 0.10em 0em rgba(24, 153, 214, 0.3);
+  font-size: 2em;
+  border: none;
+  background-color: rgb(28, 176, 246);
+  color: white;
+  width: 100%;
+}
+
+.sketchboard__buttons__clear-button:active {
+  box-shadow: none;
+  box-shadow: 0em 0.03em 0.03em 0em rgba(24, 153, 214, 0.3);
+  margin: 0.03em 0 0;
 }
 
 .sketchboard__area {
