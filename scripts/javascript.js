@@ -1,17 +1,5 @@
 let primaryMouseButtonDown = false;
 
-function setPrimaryMouseButtonState(event) {
-  event.preventDefault();
-  let flags = event.buttons !== undefined ? event.buttons : event.which;
-  primaryMouseButtonDown = (flags & 1) === 1;
-}
-
-function monitorPrimaryMouseButtonState(sketchboard) {
-  sketchboard.addEventListener("mousedown", setPrimaryMouseButtonState);
-  sketchboard.addEventListener("mousemove", setPrimaryMouseButtonState);
-  sketchboard.addEventListener("mouseup", setPrimaryMouseButtonState);
-}
-
 function getSketchboardDimensions() {
   const size = 16;
   return Math.min(size, 100);
@@ -39,25 +27,37 @@ function monitorMouseOverSketchboardPixels() {
   });
 }
 
-function monitorMouseOverSketchboard(sketchboard) {
-  monitorPrimaryMouseButtonState(sketchboard);
+function setPrimaryMouseButtonState(event) {
+  event.preventDefault();
+  let flags = event.buttons !== undefined ? event.buttons : event.which;
+  primaryMouseButtonDown = (flags & 1) === 1;
+}
+
+function monitorPrimaryMouseButtonState(sketchboardArea) {
+  sketchboardArea.addEventListener("mousedown", setPrimaryMouseButtonState);
+  sketchboardArea.addEventListener("mousemove", setPrimaryMouseButtonState);
+  sketchboardArea.addEventListener("mouseup", setPrimaryMouseButtonState);
+}
+
+function monitorMouseOverSketchboardArea(sketchboardArea) {
+  monitorPrimaryMouseButtonState(sketchboardArea);
   monitorMouseOverSketchboardPixels();
 }
 
-function createSketchboard() {
-  let sketchboard = document.querySelector(".sketchboard");
+function createSketchboardArea() {
+  let sketchboardArea = document.querySelector(".sketchboard__area");
   const size = getSketchboardDimensions();
 
-  sketchboard.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-  sketchboard.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  sketchboardArea.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+  sketchboardArea.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
 
   for (let i = 0; i < size * size; i++) {
     let sketchboardPixel = document.createElement("div");
     sketchboardPixel.classList.add("sketchboard__pixel");
-    sketchboard.append(sketchboardPixel);
+    sketchboardArea.append(sketchboardPixel);
   }
 
-  monitorMouseOverSketchboard(sketchboard);
+  monitorMouseOverSketchboardArea(sketchboardArea);
 }
 
-createSketchboard();
+createSketchboardArea();
