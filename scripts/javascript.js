@@ -18,11 +18,16 @@ function leaveSketchboardPixel(event) {
   event.target.classList.remove("sketchboard__pixel--hover");
 }
 
+function clickSketchboardPixel(event) {
+  event.target.className = "sketchboard__pixel--clicked";
+}
+
 function monitorMouseOverSketchboardPixels() {
   let sketchboardPixels = document.querySelectorAll(".sketchboard__pixel");
 
   sketchboardPixels.forEach((pixel) => {
     pixel.addEventListener("mouseenter", enterSketchboardPixel);
+    pixel.addEventListener("mousedown", clickSketchboardPixel);
     pixel.addEventListener("mouseleave", leaveSketchboardPixel);
   });
 }
