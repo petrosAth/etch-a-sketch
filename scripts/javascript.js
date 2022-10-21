@@ -2,8 +2,14 @@ let primaryMouseButtonDown = false;
 
 function getSketchboardDimensions() {
   const sidePixelCount = prompt("Set the number of squares per side:", "");
-  // const sidePixelCount = 16;
   return Math.min(sidePixelCount, 100);
+}
+
+function getRandomRgbColor() {
+  const randomRed = Math.floor(Math.random() * 255);
+  const randomGreen = Math.floor(Math.random() * 255);
+  const randomBlue = Math.floor(Math.random() * 255);
+  return `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
 }
 
 function enterSketchboardPixel(event) {
@@ -12,7 +18,7 @@ function enterSketchboardPixel(event) {
 
   if (primaryMouseButtonDown) {
     // event.target.className = "sketchboard__pixel--clicked";
-    event.target.style.backgroundColor = "purple";
+    event.target.style.backgroundColor = getRandomRgbColor();
   }
 }
 
@@ -22,7 +28,7 @@ function leaveSketchboardPixel(event) {
 
 function clickSketchboardPixel(event) {
   // event.target.className = "sketchboard__pixel--clicked";
-  event.target.style.backgroundColor = "purple";
+  event.target.style.backgroundColor = getRandomRgbColor();
 }
 
 function monitorMouseOverSketchboardPixels() {
