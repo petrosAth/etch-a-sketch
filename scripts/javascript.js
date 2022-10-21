@@ -12,9 +12,6 @@ function getRandomRgbColor() {
   return `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
 }
 
-function enterSketchboardPixel(event) {
-  event.preventDefault();
-  event.target.classList.add("sketchboard__pixel--hover");
 
   if (primaryMouseButtonDown) {
     // event.target.className = "sketchboard__pixel--clicked";
@@ -22,8 +19,9 @@ function enterSketchboardPixel(event) {
   }
 }
 
-function leaveSketchboardPixel(event) {
-  event.target.classList.remove("sketchboard__pixel--hover");
+function enterSketchboardPixel(event) {
+  event.preventDefault();
+
 }
 
 function clickSketchboardPixel(event) {
@@ -37,7 +35,6 @@ function monitorMouseOverSketchboardPixels() {
   sketchboardPixels.forEach((pixel) => {
     pixel.addEventListener("mouseenter", enterSketchboardPixel);
     pixel.addEventListener("mousedown", clickSketchboardPixel);
-    pixel.addEventListener("mouseleave", leaveSketchboardPixel);
   });
 }
 
