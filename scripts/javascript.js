@@ -1,8 +1,9 @@
 let primaryMouseButtonDown = false;
 
 function getSketchboardDimensions() {
-  const size = 16;
-  return Math.min(size, 100);
+  const sidePixelCount = prompt("Set the number of squares per side:", "");
+  // const sidePixelCount = 16;
+  return Math.min(sidePixelCount, 100);
 }
 
 function enterSketchboardPixel(event) {
@@ -10,7 +11,8 @@ function enterSketchboardPixel(event) {
   event.target.classList.add("sketchboard__pixel--hover");
 
   if (primaryMouseButtonDown) {
-    event.target.className = "sketchboard__pixel--clicked";
+    // event.target.className = "sketchboard__pixel--clicked";
+    event.target.style.backgroundColor = "purple";
   }
 }
 
@@ -19,7 +21,8 @@ function leaveSketchboardPixel(event) {
 }
 
 function clickSketchboardPixel(event) {
-  event.target.className = "sketchboard__pixel--clicked";
+  // event.target.className = "sketchboard__pixel--clicked";
+  event.target.style.backgroundColor = "purple";
 }
 
 function monitorMouseOverSketchboardPixels() {
@@ -44,25 +47,40 @@ function monitorPrimaryMouseButtonState(sketchboardArea) {
   sketchboardArea.addEventListener("mouseup", setPrimaryMouseButtonState);
 }
 
-function monitorMouseOverSketchboardArea(sketchboardArea) {
+function monitorSketchboardArea(sketchboardArea) {
   monitorPrimaryMouseButtonState(sketchboardArea);
   monitorMouseOverSketchboardPixels();
 }
 
-function createSketchboardArea() {
-  let sketchboardArea = document.querySelector(".sketchboard__area");
-  const size = getSketchboardDimensions();
-
-  sketchboardArea.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-  sketchboardArea.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-
-  for (let i = 0; i < size * size; i++) {
+function createSketchboardPixels(sketchboardArea, sidePixelCount) {
+  for (let i = 0; i < sidePixelCount * sidePixelCount; i++) {
     let sketchboardPixel = document.createElement("div");
     sketchboardPixel.classList.add("sketchboard__pixel");
     sketchboardArea.append(sketchboardPixel);
   }
-
-  monitorMouseOverSketchboardArea(sketchboardArea);
 }
 
-createSketchboardArea();
+function clearSketchboardArea(sketchboardArea) {
+  sketchboardArea.innerHTML = "";
+}
+
+function createSketchboardArea() {
+  let sketchboardArea = document.querySelector(".sketchboard__area");
+  let sidePixelCount = getSketchboardDimensions();
+
+  sketchboardArea.style.gridTemplateRows = `repeat(${sidePixelCount}, 1fr)`;
+  sketchboardArea.style.gridTemplateColumns = `repeat(${sidePixelCount}, 1fr)`;
+
+  clearSketchboardArea(sketchboardArea);
+  createSketchboardPixels(sketchboardArea, sidePixelCount);
+  monitorSketchboardArea(sketchboardArea);
+}
+
+function sketch() {
+  const newBoardButton = document.querySelector(
+    ".sketchboard__buttons__new-board"
+  );
+  newBoardButton.addEventListener("click", createSketchboardArea);
+}
+
+sketch();
