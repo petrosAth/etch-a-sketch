@@ -13,10 +13,11 @@ body {
 .sketchboard {
   margin: 5vh auto;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 80%;
-  max-width: 40vw;
-  max-height: 40vh;
+  grid-template-columns: 1fr 2fr;
+  /* grid-template-columns: 1fr; */
+  /* grid-template-rows: auto 80%; */
+  max-width: 60vw;
+  max-height: 60vh;
   gap: 1em;
 }
 
@@ -25,7 +26,7 @@ body {
   justify-content: center;
 }
 
-.sketchboard__buttons__new-board {
+.sketchboard__buttons__clear-area {
   box-shadow: 0em 0.1em 0.1em 0em rgba(24, 153, 214, 0.3);
   font-size: 2em;
   border: none;
@@ -34,7 +35,7 @@ body {
   width: 100%;
 }
 
-.sketchboard__buttons__new-board:active {
+.sketchboard__buttons__clear-area:active {
   box-shadow: none;
   box-shadow: 0em 0.03em 0.03em 0em rgba(24, 153, 214, 0.3);
   margin: 0.03em 0 0;

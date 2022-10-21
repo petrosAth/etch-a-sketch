@@ -1,6 +1,6 @@
 let primaryMouseButtonDown = false;
 
-function getSketchboardDimensions() {
+function getDimensions() {
   const sidePixelCount = prompt("Set the number of squares per side:", "");
   return Math.min(sidePixelCount, 100);
 }
@@ -12,29 +12,47 @@ function getRandomRgbColor() {
   return `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
 }
 
+function darkenColor(rgbColorString) {
+  const rgbColor = rgbColorString.match(/\d+/g).map(Number);
 
-  if (primaryMouseButtonDown) {
-    // event.target.className = "sketchboard__pixel--clicked";
+  rgbColor.forEach((part, index) => {
+    rgbColor[index] = Math.max(0, rgbColor[index] - 26);
+  });
+  rgbColorString = `rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]})`;
+
+  return rgbColorString;
+}
+
+function draw(event) {
+  if (event.target.classList.contains("sketchboard__pixel--clicked")) {
+    let bgColor = event.target.style.backgroundColor;
+    const darkenedBgColor = darkenColor(bgColor);
+
+    event.target.style.backgroundColor = darkenedBgColor;
+  } else {
+    event.target.className = "sketchboard__pixel--clicked";
     event.target.style.backgroundColor = getRandomRgbColor();
   }
 }
 
-function enterSketchboardPixel(event) {
+function enterPixel(event) {
   event.preventDefault();
 
+  if (primaryMouseButtonDown) {
+    draw(event);
+  }
 }
 
-function clickSketchboardPixel(event) {
-  // event.target.className = "sketchboard__pixel--clicked";
-  event.target.style.backgroundColor = getRandomRgbColor();
+function clickPixel(event) {
+  draw(event);
 }
 
-function monitorMouseOverSketchboardPixels() {
-  let sketchboardPixels = document.querySelectorAll(".sketchboard__pixel");
+function monitorMouseOverPixels() {
+  let pixels = document.querySelectorAll(".sketchboard__pixel");
 
-  sketchboardPixels.forEach((pixel) => {
-    pixel.addEventListener("mouseenter", enterSketchboardPixel);
-    pixel.addEventListener("mousedown", clickSketchboardPixel);
+  pixels.forEach((pixel) => {
+    pixel.addEventListener("mouseenter", enterPixel);
+    pixel.addEventListener("mousedown", clickPixel);
   });
 }
 
@@ -44,46 +62,50 @@ function setPrimaryMouseButtonState(event) {
   primaryMouseButtonDown = (flags & 1) === 1;
 }
 
-function monitorPrimaryMouseButtonState(sketchboardArea) {
-  sketchboardArea.addEventListener("mousedown", setPrimaryMouseButtonState);
-  sketchboardArea.addEventListener("mousemove", setPrimaryMouseButtonState);
-  sketchboardArea.addEventListener("mouseup", setPrimaryMouseButtonState);
+function monitorPrimaryMouseButtonState(area) {
+  area.addEventListener("mousedown", setPrimaryMouseButtonState);
+  area.addEventListener("mousemove", setPrimaryMouseButtonState);
+  area.addEventListener("mouseup", setPrimaryMouseButtonState);
 }
 
-function monitorSketchboardArea(sketchboardArea) {
-  monitorPrimaryMouseButtonState(sketchboardArea);
-  monitorMouseOverSketchboardPixels();
+function monitorArea(area) {
+  monitorPrimaryMouseButtonState(area);
+  monitorMouseOverPixels();
 }
 
-function createSketchboardPixels(sketchboardArea, sidePixelCount) {
+function createPixels(area, sidePixelCount) {
   for (let i = 0; i < sidePixelCount * sidePixelCount; i++) {
-    let sketchboardPixel = document.createElement("div");
-    sketchboardPixel.classList.add("sketchboard__pixel");
-    sketchboardArea.append(sketchboardPixel);
+    let pixel = document.createElement("div");
+    pixel.classList.add("sketchboard__pixel");
+    area.append(pixel);
   }
 }
 
-function clearSketchboardArea(sketchboardArea) {
-  sketchboardArea.innerHTML = "";
+function clearArea(area) {
+  area.innerHTML = "";
 }
 
-function createSketchboardArea() {
-  let sketchboardArea = document.querySelector(".sketchboard__area");
-  let sidePixelCount = getSketchboardDimensions();
+function createArea(sidePixelCount) {
+  let area = document.querySelector(".sketchboard__area");
 
-  sketchboardArea.style.gridTemplateRows = `repeat(${sidePixelCount}, 1fr)`;
-  sketchboardArea.style.gridTemplateColumns = `repeat(${sidePixelCount}, 1fr)`;
+  area.style.gridTemplateRows = `repeat(${sidePixelCount}, 1fr)`;
+  area.style.gridTemplateColumns = `repeat(${sidePixelCount}, 1fr)`;
 
-  clearSketchboardArea(sketchboardArea);
-  createSketchboardPixels(sketchboardArea, sidePixelCount);
-  monitorSketchboardArea(sketchboardArea);
+  clearArea(area);
+  createPixels(area, sidePixelCount);
+  monitorArea(area);
 }
 
 function sketch() {
-  const newBoardButton = document.querySelector(
-    ".sketchboard__buttons__new-board"
+  const clearAreaButton = document.querySelector(
+    ".sketchboard__buttons__clear-area"
   );
-  newBoardButton.addEventListener("click", createSketchboardArea);
+  clearAreaButton.addEventListener("click", () => {
+    // let sidePixelCount = getDimensions();
+    // createArea(sidePixelCount);
+    createArea(16);
+  });
 }
 
+createArea(8);
 sketch();
