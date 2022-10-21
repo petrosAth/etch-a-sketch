@@ -23,16 +23,19 @@ body {
 
 .sketchboard__buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  /* align-content: space-between; */
+  flex-direction: column;
+  /* gap: 0.5em; */
 }
 
-.sketchboard__buttons__clear-area {
+[class^="sketchboard__buttons__"] {
   box-shadow: 0em 0.1em 0.1em 0em rgba(24, 153, 214, 0.3);
-  font-size: 2em;
   border: none;
   background-color: rgb(28, 176, 246);
   color: white;
   width: 100%;
+  padding: 2.5% 5%;
 }
 
 .sketchboard__buttons__clear-area:active {
