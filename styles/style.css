@@ -10,47 +10,107 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+.sketchboard,
+.sketchboard__clear,
+.sketchboard__tools,
+.sketchboard__colors {
+  color: white;
+  display: grid;
+  gap: 0.05em;
+}
+
 .sketchboard {
   margin: 5vh auto;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  /* grid-template-columns: 1fr; */
-  /* grid-template-rows: auto 80%; */
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   max-width: 60vw;
   max-height: 60vh;
-  gap: 1em;
+  aspect-ratio: 1;
 }
 
-.sketchboard__buttons {
-  display: flex;
-  justify-content: space-between;
-  /* align-content: space-between; */
-  flex-direction: column;
-  /* gap: 0.5em; */
+/* .sketchboard__clear { */
+/* } */
+
+.sketchboard__tools {
+  grid-row: 2 / 11;
+  grid-column: 1;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(9, 1fr);
 }
 
-[class^="sketchboard__buttons__"] {
+.sketchboard__colors {
+  grid-row: 1;
+  grid-column: 2 / 11;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.sketchboard__area {
+  box-shadow: 0em 0.25em 0.25em 0em rgba(24, 153, 214, 0.3);
+  justify-content: center;
+  align-content: center;
+  grid-row: 2 / 11;
+  grid-column: 2 / 11;
+  display: grid;
+}
+
+[class^="sketchboard__clear__"],
+[class^="sketchboard__tools__"],
+[class^="sketchboard__colors__"] {
+  font-size: 0.25em;
   box-shadow: 0em 0.1em 0.1em 0em rgba(24, 153, 214, 0.3);
   border: none;
   background-color: rgb(28, 176, 246);
   color: white;
-  width: 100%;
-  padding: 2.5% 5%;
 }
 
-.sketchboard__buttons__clear-area:active {
-  box-shadow: none;
-  box-shadow: 0em 0.03em 0.03em 0em rgba(24, 153, 214, 0.3);
-  margin: 0.03em 0 0;
+.sketchboard__tools__color-picker {
+  grid-row: 2 / 3;
 }
 
-.sketchboard__area {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  aspect-ratio: 1;
-  box-shadow: 0em 0.25em 0.25em 0em rgba(24, 153, 214, 0.3);
+.sketchboard__tools__rainbow {
+  grid-row: 3 / 4;
 }
+
+.sketchboard__tools__eraser {
+  grid-row: 4 / 5;
+}
+
+.sketchboard__colors__black {
+  grid-column: 2 / 3;
+  background-color: black;
+}
+
+.sketchboard__colors__white {
+  grid-column: 3 / 4;
+  background-color: white;
+}
+
+.sketchboard__colors__red {
+  grid-column: 4 / 5;
+  background-color: red;
+}
+
+.sketchboard__colors__green {
+  grid-column: 5 / 6;
+  background-color: green;
+}
+
+.sketchboard__colors__yellow {
+  grid-column: 6 / 7;
+  background-color: yellow;
+}
+
+.sketchboard__colors__blue {
+  grid-column: 7 / 8;
+  background-color: blue;
+}
+
+/* .sketchboard__tools__clear-area:active { */
+/*   box-shadow: none; */
+/*   box-shadow: 0em 0.03em 0.03em 0em rgba(24, 153, 214, 0.3); */
+/*   margin: 0.03em 0 0; */
+/* } */
 
 .sketchboard__pixel {
   background-color: white;

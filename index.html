@@ -6,17 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="./styles/style.css" rel="stylesheet" />
     <script src="./scripts/javascript.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/9236152b7e.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
     <div class="sketchboard">
-      <div class="sketchboard__buttons">
-        <button class="sketchboard__buttons__clear-area">Clear</button>
-        <button class="sketchboard__buttons__color-picker">Color picker</button>
-        <button class="sketchboard__buttons__rainbow">Rainbow</button>
-        <button class="sketchboard__buttons__eraser">Eraser</button>
+      <div class="sketchboard__clear">
+        <button class="sketchboard__clear__clear-area">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+      <div class="sketchboard__tools">
+        <button class="sketchboard__tools__color-picker">
+          <i class="fa-solid fa-eye-dropper"></i>
+        </button>
+        <button class="sketchboard__tools__rainbow">
+          <i class="fa-solid fa-rainbow"></i>
+        </button>
+        <button class="sketchboard__tools__eraser">
+          <i class="fa-solid fa-eraser"></i>
+        </button>
       </div>
       <div class="sketchboard__area"></div>
+      <div class="sketchboard__colors">
+        <button class="sketchboard__colors__black"></button>
+        <button class="sketchboard__colors__white"></button>
+        <button class="sketchboard__colors__red"></button>
+        <button class="sketchboard__colors__green"></button>
+        <button class="sketchboard__colors__yellow"></button>
+        <button class="sketchboard__colors__blue"></button>
+      </div>
     </div>
   </body>
 </html>

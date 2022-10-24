@@ -1,4 +1,7 @@
 let primaryMouseButtonDown = false;
+const tools = ["colorPicker", "rainbow", "eraser"];
+let drawingTool = tools["rainbow"];
+let pressure = 20;
 
 function getDimensions() {
   const sidePixelCount = prompt("Set the number of squares per side:", "");
@@ -24,9 +27,11 @@ function darkenColor(rgbColorString) {
 }
 
 function draw(event) {
+  // if ( drawingTool ===  ) {
+  //
+  // }
   if (event.target.classList.contains("sketchboard__pixel--clicked")) {
-    let bgColor = event.target.style.backgroundColor;
-    const darkenedBgColor = darkenColor(bgColor);
+    const darkenedBgColor = darkenColor(event.target.style.backgroundColor);
 
     event.target.style.backgroundColor = darkenedBgColor;
   } else {
@@ -97,10 +102,8 @@ function createArea(sidePixelCount) {
 }
 
 function sketch() {
-  const clearAreaButton = document.querySelector(
-    ".sketchboard__buttons__clear-area"
-  );
-  clearAreaButton.addEventListener("click", () => {
+  const clearArea = document.querySelector(".sketchboard__clear__clear-area");
+  clearArea.addEventListener("click", () => {
     // let sidePixelCount = getDimensions();
     // createArea(sidePixelCount);
     createArea(16);
