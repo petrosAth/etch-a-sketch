@@ -8,6 +8,7 @@
 
 body {
   font-family: Roboto, sans-serif;
+  background-color: rgb(230, 230, 230);
 }
 
 .sketchboard,
@@ -27,9 +28,6 @@ body {
   max-height: 60vh;
   aspect-ratio: 1;
 }
-
-/* .sketchboard__clear { */
-/* } */
 
 .sketchboard__colors {
   grid-row: 2 / 11;
@@ -103,33 +101,43 @@ body {
 }
 
 .sketchboard__colors__black {
-  grid-row: 4 / 5;
-  background-color: black;
+  grid-row: 2 / 3;
+  /* background-color: rgb(0, 0, 0); */
 }
 
 .sketchboard__colors__white {
-  grid-row: 5 / 6;
-  background-color: white;
+  grid-row: 3 / 4;
+  /* background-color: rgb(255, 255, 255); */
+}
+
+.sketchboard__colors__magenta {
+  grid-row: 4 / 5;
+  /* background-color: rgb(255, 0, 255); */
 }
 
 .sketchboard__colors__red {
+  grid-row: 5 / 6;
+  /* background-color: rgb(255, 0, 0); */
+}
+
+.sketchboard__colors__yellow {
   grid-row: 6 / 7;
-  background-color: red;
+  background-color: rgb(255, 255, 0);
 }
 
 .sketchboard__colors__green {
   grid-row: 7 / 8;
-  background-color: green;
+  background-color: rgb(0, 255, 0);
 }
 
-.sketchboard__colors__yellow {
+.sketchboard__colors__cyan {
   grid-row: 8 / 9;
-  background-color: yellow;
+  background-color: rgb(0, 255, 255);
 }
 
 .sketchboard__colors__blue {
   grid-row: 9 / 10;
-  background-color: blue;
+  background-color: rgb(0, 0, 255);
 }
 
 /* .sketchboard__tools__clear-area:active { */
@@ -143,7 +151,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .sketchboard__tools__size__input {
@@ -157,8 +164,4 @@ body {
 
 .sketchboard__pixel {
   background-color: white;
-}
-
-.sketchboard__pixel--clicked {
-  background-color: blue;
 }
