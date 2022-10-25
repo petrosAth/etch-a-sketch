@@ -7,14 +7,19 @@ const tools = [
   "eraser",
   "color",
 ];
+let areaSize = 16;
 const areaBg = "rgb(255, 255, 255)";
 let drawingTool = "rainbow";
 let drawingColor = "black";
-let pressure = 20;
 
-function getDimensions() {
-  const sidePixelCount = prompt("Set the number of squares per side:", "");
-  return Math.min(sidePixelCount, 100);
+function calculateDimensions() {
+  if (window.innerWidth > window.innerHeight) {
+    document.querySelector(".sketchboard").style.maxWidth = "90vh";
+    document.querySelector(".sketchboard").style.maxHeight = "90vh";
+  } else {
+    document.querySelector(".sketchboard").style.maxWidth = "90vw";
+    document.querySelector(".sketchboard").style.maxHeight = "90vw";
+  }
 }
 
 function getRandomRgbColor() {
@@ -113,6 +118,7 @@ function clearArea(area) {
 }
 
 function createArea(sidePixelCount) {
+  sidePixelCount = sidePixelCount > 100 ? 100 : sidePixelCount;
   let area = document.querySelector(".sketchboard__area");
 
   area.style.gridTemplateRows = `repeat(${sidePixelCount}, 1fr)`;
@@ -123,15 +129,29 @@ function createArea(sidePixelCount) {
   monitorArea(area);
 }
 
-function createTool(tool, color = "") {
+function createTool(tool, value) {
   drawingTool = tool;
 
   if (tool === "color") {
-    drawingColor = color;
+    drawingColor = value;
+  }
+
+  if (tool === "sizeTool") {
+    drawingTool = "rainbow";
+    areaSize = value === "" ? 16 : value;
+    createArea(areaSize);
   }
 }
 
 function getTool() {
+  const clearArea = document.querySelector(".sketchboard__clear__clear-area");
+  clearArea.addEventListener("click", () => createArea(areaSize));
+
+  const sizeTool = document.querySelector(".sketchboard__tools__size");
+  sizeTool.addEventListener("input", (event) =>
+    createTool("sizeTool", event.target.value)
+  );
+
   const colorPickerTool = document.querySelector(
     ".sketchboard__tools__color-picker"
   );
@@ -200,16 +220,6 @@ function getTool() {
   );
 }
 
-function sketch() {
-  const clearArea = document.querySelector(".sketchboard__clear__clear-area");
-  clearArea.addEventListener("click", () => {
-    // let sidePixelCount = getDimensions();
-    // createArea(sidePixelCount);
-    createArea(16);
-  });
-
-  getTool();
-}
-
-createArea(8);
-sketch();
+calculateDimensions();
+createArea(areaSize);
+getTool();
