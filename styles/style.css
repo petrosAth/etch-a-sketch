@@ -71,7 +71,10 @@ body {
 }
 
 .sketchboard__tools__color-picker {
-  grid-column: 5 / 6;
+  grid-column: 4 / 6;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
 }
 
 .sketchboard__tools__rainbow {
@@ -164,4 +167,31 @@ body {
 
 .sketchboard__pixel {
   background-color: white;
+.sketchboard__tools__color-picker__icon {
+  grid-column: 1 / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sketchboard__tools__color-picker__input {
+  grid-column: 2 / 3;
+  width: 100%;
+  font-size: 1.5em;
+  border: none;
+  padding: 0 10%;
+  outline: none;
+}
+
+input[type="color"] {
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
 }

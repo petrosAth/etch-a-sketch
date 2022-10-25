@@ -132,66 +132,68 @@ function createTool(tool, color = "") {
 }
 
 function getTool() {
-  let colorPickerTool = document.querySelector(
+  const colorPickerTool = document.querySelector(
     ".sketchboard__tools__color-picker"
   );
-  colorPickerTool.addEventListener("click", () => createTool("colorPicker"));
+  colorPickerTool.addEventListener("change", (event) =>
+    createTool("color", event.target.value)
+  );
 
-  let rainbowTool = document.querySelector(".sketchboard__tools__rainbow");
+  const rainbowTool = document.querySelector(".sketchboard__tools__rainbow");
   rainbowTool.addEventListener("click", () => createTool("rainbow"));
 
-  let lightenTool = document.querySelector(".sketchboard__tools__lighten");
+  const lightenTool = document.querySelector(".sketchboard__tools__lighten");
   lightenTool.addEventListener("click", () => createTool("lighten"));
 
-  let darkenTool = document.querySelector(".sketchboard__tools__darken");
+  const darkenTool = document.querySelector(".sketchboard__tools__darken");
   darkenTool.addEventListener("click", () => createTool("darken"));
 
-  let eraserTool = document.querySelector(".sketchboard__tools__eraser");
+  const eraserTool = document.querySelector(".sketchboard__tools__eraser");
   eraserTool.addEventListener("click", () => createTool("eraser"));
 
-  let blackColor = document.querySelector(".sketchboard__colors__black");
+  const blackColor = document.querySelector(".sketchboard__colors__black");
   blackColor.style.backgroundColor = "rgb(0, 0, 0)";
   blackColor.addEventListener("click", () =>
     createTool("color", blackColor.style.backgroundColor)
   );
 
-  let whiteColor = document.querySelector(".sketchboard__colors__white");
+  const whiteColor = document.querySelector(".sketchboard__colors__white");
   whiteColor.style.backgroundColor = "rgb(255, 255, 255)";
   whiteColor.addEventListener("click", () =>
     createTool("color", whiteColor.style.backgroundColor)
   );
 
-  let magentaColor = document.querySelector(".sketchboard__colors__magenta");
+  const magentaColor = document.querySelector(".sketchboard__colors__magenta");
   magentaColor.style.backgroundColor = "rgb(255, 0, 255)";
   magentaColor.addEventListener("click", () =>
     createTool("color", magentaColor.style.backgroundColor)
   );
 
-  let redColor = document.querySelector(".sketchboard__colors__red");
+  const redColor = document.querySelector(".sketchboard__colors__red");
   redColor.style.backgroundColor = "rgb(255, 0, 0)";
   redColor.addEventListener("click", () =>
     createTool("color", redColor.style.backgroundColor)
   );
 
-  let yellowColor = document.querySelector(".sketchboard__colors__yellow");
+  const yellowColor = document.querySelector(".sketchboard__colors__yellow");
   yellowColor.style.backgroundColor = "rgb(255, 255, 0)";
   yellowColor.addEventListener("click", () =>
     createTool("color", yellowColor.style.backgroundColor)
   );
 
-  let greenColor = document.querySelector(".sketchboard__colors__green");
+  const greenColor = document.querySelector(".sketchboard__colors__green");
   greenColor.style.backgroundColor = "rgb(0, 255, 0)";
   greenColor.addEventListener("click", () =>
     createTool("color", greenColor.style.backgroundColor)
   );
 
-  let cyanColor = document.querySelector(".sketchboard__colors__cyan");
+  const cyanColor = document.querySelector(".sketchboard__colors__cyan");
   cyanColor.style.backgroundColor = "rgb(0, 255, 255)";
   cyanColor.addEventListener("click", () =>
     createTool("color", cyanColor.style.backgroundColor)
   );
 
-  let blueColor = document.querySelector(".sketchboard__colors__blue");
+  const blueColor = document.querySelector(".sketchboard__colors__blue");
   blueColor.style.backgroundColor = "rgb(0, 0, 255)";
   blueColor.addEventListener("click", () =>
     createTool("color", blueColor.style.backgroundColor)
